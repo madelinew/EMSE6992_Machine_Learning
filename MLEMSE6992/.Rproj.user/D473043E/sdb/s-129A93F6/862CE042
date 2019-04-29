@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1549918327194.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "862CE042",
+    "lastKnownWriteTime" : 4613737984,
+    "last_content_update" : 1549918327194,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "CE502778",
+        "caption" : "yesdf15",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=yesdf15&cache_key=CE502778",
+        "displayedObservations" : "6422",
+        "environment" : "",
+        "object" : "yesdf15",
+        "preview" : "0",
+        "totalObservations" : "6422",
+        "variables" : "13"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}
