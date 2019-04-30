@@ -1,0 +1,54 @@
+<!-- You must include this JavaScript file -->
+<script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+
+<!-- For the full list of available Crowd HTML Elements and their input/output documentation,
+      please refer to https://docs.aws.amazon.com/sagemaker/latest/dg/sms-ui-template-reference.html -->
+
+<!-- You must include crowd-form so that your task submits answers to MTurk -->
+<!-- For help on using this template, see the blog post: https://blog.mturk.com/editing-the-survey-link-project-template-in-the-ui-7c75285105fb#.py7towsdx --><!-- HIT template: SurveyLink-v3.0 --><!-- The following snippet enables the 'responsive' behavior on smaller screens -->
+<crowd-form>
+    <!-- The crowd-classifier element will create a tool for the Worker to select the
+           correct answer to your question -->
+    <crowd-classifier
+      name="classification"
+      categories="['Approves', 'Disapproves', 'Neither/Unknown']"
+      header="PLEASE READ INSTRUCTIONS! What opinion on texting/using a cell phone while driving does this tweet convey?"
+    >
+
+      <classification-target>
+        <!-- The text you want classified will be substituted for the "text" variable when you
+               publish a batch with a CSV input file containing multiple text items  -->
+        Tweet ID: ${id}
+        <p></p>
+        ${text}
+      </classification-target>
+      <short-instructions>
+          <p>Choose the primary opinion category that is expressed by the tweet.</p>
+      </short-instructions>
+      <full-instructions>
+          <p>Determine if the tweet indicates that the person who posted it/retweeted it approves texting/using a cell phone while driving or disapproves texting/using a cell phone while driving.</p>
+          <p>Examples of <strong>Approves</strong>:</p>
+          <ul>
+              <li>The tweet says “I am driving right now”.</li>
+              <li>The tweet does not support a texting while driving law.</li>
+              <li>The tweet supports others texting and driving.</li>
+          </ul>
+          <p>Examples of <strong>Disapproves</strong>:</p>
+          <ul>
+              <li>The tweet says “Don’t text and drive”.</li>
+              <li>The tweet says “Say no to distracted driving”.</li>
+              <li>The tweet mentions seeing somebody else texting and driving and gives a negative view point about them doing it.</li>
+              <li>Tweets involving statistics based on texting and driving that are based on deaths.</li>
+              <li>Tweets that are concerning new laws or bills being passed based on texting and driving without the person stating they disapprove them.</li>
+          </ul>
+          <p>Examples of <strong>Neither/Unknown</strong>:</p>
+          <ul>
+              <li>The tweet/retweet says “My girlfriend is driving me crazy”.</li>
+              <li>The tweet/retweet says “I love texting my mom”.</li>
+              <li>The tweet/retweet is cut off before a mention of using a cell phone while driving.</li>
+              <li>The tweet/retweet mentions seeing somebody use their cell phone while driving but does not state their opinion on the matter (either through text or emojis).</li>
+          </ul>
+
+      </full-instructions>
+    </crowd-classifier>
+</crowd-form>

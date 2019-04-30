@@ -32,19 +32,32 @@ fatal_YYsetup <- function(df, YYYY) {
   y = YYYY
   
   fatal <- as.data.frame(cbind.data.frame(df$casenum, df$statenum, df$vnumber, df$accday, df$accmon,
-                                          df$caseyear, df$landuse, df$age, df$vfatcount, df$numoccs,
+                                          df$caseyear, df$landuse, df$age, df$body, df$vfatcount, df$numoccs,
                                           df$modelyr, df$dridistract), 
                            header = TRUE, as.is = TRUE, stringsAsFactor=FALSE)
  
-  colnames(fatal) <- c("casenum", "statenum", "vehnum","day", "month", "year", "landuse", "age",
+  colnames(fatal) <- c("casenum", "statenum", "vehnum","day", "month", "year", "landuse", "age","bodytype",
                          "vfatcount", "numoccs", "modelyr", "dridistract")
-  
   #Fixing age as num
   fatal$age <- as.integer(fatal$age)
   fatal <- unique(fatal)
+  totalraw <- dim(df)[1]
   #removes error coded ages
+  removed <- fatal[fatal$age >= 997,]
+  rem1 <- dim(removed)[1]
   fatal <- fatal[fatal$age < 997,]
-  
+  #removes unknown model years
+  removed2 <- fatal[fatal$modelyr >= 9999,]
+  rem2 <- dim(removed2)[1]
+  fatal <- fatal[fatal$modelyr < 9999,]
+  #removes unknown number of occs
+  removed3 <- fatal[fatal$numoccs >= 99,]
+  rem3 <- dim(removed3)[1]
+  fatal <- fatal[fatal$numoccs < 99,]
+  print("Total number of accidents removed: ")
+  print(sum(rem1,rem2,rem3))
+  print("out of ")
+  print(totalraw)
   return(fatal)
 }
 
@@ -110,7 +123,7 @@ fulldataset <- rbind(fatal_15dsfinal, fatal_16dsfinal)
 tableToCSV <- function(df) {
   #df = fulldata
   row.names(df)<- NULL
-  colnames(df) <- c("casenum", "statenum", "vehnum","day", "month", "year", "landuse", "age",
+  colnames(df) <- c("casenum", "statenum", "vehnum","day", "month", "year", "landuse", "age", "bodytype",
                     "vfatcount", "numoccs", "modelyr", "cellphone_use")
   write.csv(df, file = "fulldataset1516.csv")
 }
